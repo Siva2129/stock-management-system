@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StockFlow - Project Explanation</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: #0f1117; color: #e2e4ea; line-height: 1.7; padding: 40px; }
+  .container { max-width: 900px; margin: 0 auto; }
+
+  /* Header */
+  .header { text-align: center; padding: 50px 20px; background: linear-gradient(135deg, #1a1f2e, #252b3d); border-radius: 20px; margin-bottom: 30px; border: 1px solid #2a3147; }
+  .header .icon { font-size: 52px; margin-bottom: 12px; }
+  .header h1 { font-size: 36px; font-weight: 800; background: linear-gradient(135deg, #4f7cff, #a855f7); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  .header p { color: #8b92a8; font-size: 15px; margin-top: 6px; }
+  .header .badge { display: inline-block; background: #4f7cff22; color: #4f7cff; padding: 5px 16px; border-radius: 99px; font-size: 12px; font-weight: 600; margin-top: 14px; }
+
+  /* Section */
+  .section { background: #1a1f2e; border: 1px solid #2a3147; border-radius: 16px; padding: 30px; margin-bottom: 24px; }
+  .section h2 { font-size: 20px; font-weight: 700; margin-bottom: 18px; display: flex; align-items: center; gap: 10px; }
+  .section h2 .num { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 9px; font-size: 14px; font-weight: 700; color: #fff; flex-shrink: 0; }
+
+  /* Colors for numbers */
+  .blue { background: #4f7cff; }
+  .green { background: #22c55e; }
+  .purple { background: #a855f7; }
+  .amber { background: #f59e0b; }
+  .red { background: #ef4444; }
+  .cyan { background: #06b6d4; }
+
+  /* What is this project */
+  .highlight-box { background: linear-gradient(135deg, #4f7cff15, #a855f715); border: 1px solid #4f7cff33; border-radius: 12px; padding: 22px 26px; font-size: 15.5px; line-height: 1.8; }
+  .highlight-box strong { color: #4f7cff; }
+
+  /* Tech Stack Grid */
+  .tech-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .tech-card { background: #151923; border: 1px solid #2a3147; border-radius: 12px; padding: 18px 20px; display: flex; align-items: center; gap: 14px; }
+  .tech-card .emoji { font-size: 28px; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; border-radius: 12px; flex-shrink: 0; }
+  .tech-card h3 { font-size: 14.5px; font-weight: 700; }
+  .tech-card p { font-size: 12.5px; color: #8b92a8; margin-top: 2px; }
+  .t-react .emoji { background: #06b6d422; }
+  .t-fastapi .emoji { background: #22c55e22; }
+  .t-sqlite .emoji { background: #f59e0b22; }
+  .t-jwt .emoji { background: #a855f722; }
+
+  /* OOP Table */
+  .oop-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .oop-card { background: #151923; border-radius: 12px; padding: 16px 18px; border-left: 4px solid; }
+  .oop-card h4 { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+  .oop-card p { font-size: 12.5px; color: #8b92a8; }
+  .oop-card.enc { border-color: #4f7cff; }
+  .oop-card.enc h4 { color: #4f7cff; }
+  .oop-card.inh { border-color: #22c55e; }
+  .oop-card.inh h4 { color: #22c55e; }
+  .oop-card.pol { border-color: #a855f7; }
+  .oop-card.pol h4 { color: #a855f7; }
+  .oop-card.abs { border-color: #f59e0b; }
+  .oop-card.abs h4 { color: #f59e0b; }
+
+  /* Features */
+  .feat-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  .feat { background: #151923; border-radius: 10px; padding: 14px 16px; text-align: center; }
+  .feat .fi { font-size: 24px; margin-bottom: 6px; }
+  .feat h4 { font-size: 13px; font-weight: 600; }
+  .feat p { font-size: 11.5px; color: #8b92a8; margin-top: 3px; }
+
+  /* Flow */
+  .flow { display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; padding: 10px 0; }
+  .flow-step { background: #151923; border: 1px solid #2a3147; border-radius: 10px; padding: 12px 20px; text-align: center; min-width: 130px; }
+  .flow-step .fi { font-size: 22px; }
+  .flow-step p { font-size: 12px; font-weight: 600; margin-top: 4px; }
+  .flow-step span { font-size: 11px; color: #8b92a8; }
+  .flow-arrow { font-size: 20px; color: #4f7cff; }
+
+  /* Login box */
+  .login-table { width: 100%; border-collapse: collapse; }
+  .login-table th { text-align: left; padding: 10px 14px; background: #151923; color: #8b92a8; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+  .login-table td { padding: 10px 14px; border-top: 1px solid #2a3147; font-size: 13.5px; }
+  .login-table tr:hover td { background: #151923; }
+  .role-badge { padding: 3px 10px; border-radius: 99px; font-size: 11.5px; font-weight: 600; }
+  .role-admin { background: #4f7cff22; color: #4f7cff; }
+  .role-manager { background: #a855f722; color: #a855f7; }
+  .role-staff { background: #22c55e22; color: #22c55e; }
+
+  /* Footer */
+  .footer { text-align: center; padding: 30px; color: #555; font-size: 12px; }
+
+  /* Print styles */
+  @media print {
+    body { background: #fff; color: #1a1a1a; padding: 20px; }
+    .container { max-width: 100%; }
+    .header { background: #f0f4ff; border-color: #ddd; }
+    .header h1 { -webkit-text-fill-color: #4f7cff; }
+    .header p, .tech-card p, .oop-card p, .feat p, .flow-step span { color: #666; }
+    .section { background: #fafafa; border-color: #ddd; }
+    .tech-card, .oop-card, .feat, .flow-step, .login-table th { background: #f5f5f5; }
+    .highlight-box { background: #f0f4ff; border-color: #4f7cff55; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="icon">📦</div>
+    <h1>StockFlow</h1>
+    <p>Full-Stack Stock Management System</p>
+    <div class="badge">React + FastAPI + SQLite + OOP</div>
+  </div>
+
+  <!-- 1. WHAT IS THIS PROJECT -->
+  <div class="section">
+    <h2><span class="num blue">1</span> What is this Project?</h2>
+    <div class="highlight-box">
+      StockFlow is a <strong>complete stock management system</strong> where a shop or warehouse can manage their
+      <strong>products, inventory, suppliers, and sales transactions</strong>. It has <strong>3 user roles</strong>
+      (Admin, Manager, Staff) with different permissions. The backend is built using <strong>Python OOP concepts</strong>
+      demonstrating all <strong>4 pillars of OOP</strong> — Encapsulation, Inheritance, Polymorphism, and Abstraction.
+    </div>
+  </div>
+
+  <!-- 2. TECH STACK -->
+  <div class="section">
+    <h2><span class="num green">2</span> Tech Stack Used</h2>
+    <div class="tech-grid">
+      <div class="tech-card t-react">
+        <div class="emoji">⚛️</div>
+        <div><h3>React 18 + Vite</h3><p>Frontend UI — fast, component-based single page app</p></div>
+      </div>
+      <div class="tech-card t-fastapi">
+        <div class="emoji">🐍</div>
+        <div><h3>FastAPI (Python)</h3><p>Backend REST API — handles all business logic with OOP</p></div>
+      </div>
+      <div class="tech-card t-sqlite">
+        <div class="emoji">🗄️</div>
+        <div><h3>SQLite + SQLAlchemy</h3><p>Database — stores all data locally, no setup needed</p></div>
+      </div>
+      <div class="tech-card t-jwt">
+        <div class="emoji">🔐</div>
+        <div><h3>JWT Authentication</h3><p>Security — login tokens with role-based access control</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. HOW IT WORKS -->
+  <div class="section">
+    <h2><span class="num purple">3</span> How it Works (Architecture)</h2>
+    <div class="flow">
+      <div class="flow-step"><div class="fi">🖥️</div><p>React Frontend</p><span>localhost:5173</span></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><div class="fi">🔄</div><p>REST API Calls</p><span>JSON data</span></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><div class="fi">⚡</div><p>FastAPI Backend</p><span>fetch("https://stock-management-system-xevp.onrender.com/products")</span></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><div class="fi">💾</div><p>SQLite Database</p><span>.db file</span></div>
+    </div>
+    <p style="text-align:center; color:#8b92a8; font-size:13px; margin-top:12px;">
+      User interacts with React UI → React sends API requests → FastAPI processes using OOP classes → Data saved in SQLite
+    </p>
+  </div>
+
+  <!-- 4. OOP PILLARS -->
+  <div class="section">
+    <h2><span class="num amber">4</span> 4 OOP Pillars — Where & How</h2>
+    <div class="oop-grid">
+      <div class="oop-card enc">
+        <h4>🔒 Encapsulation</h4>
+        <p><b>Where:</b> Inventory._quantity, BaseProduct._cost_price</p>
+        <p>Private variables with getter/setter — quantity can only change through add_stock() and remove_stock() methods, not directly.</p>
+      </div>
+      <div class="oop-card inh">
+        <h4>🧬 Inheritance</h4>
+        <p><b>Where:</b> PhysicalProduct & DigitalProduct extend BaseProduct</p>
+        <p>Child classes inherit common fields (name, sku, price) from parent and add their own (weight, license_type).</p>
+      </div>
+      <div class="oop-card pol">
+        <h4>🎭 Polymorphism</h4>
+        <p><b>Where:</b> SalesReport, StockReport, SupplierReport</p>
+        <p>All have same generate() method, but each produces different output — same function name, different behavior.</p>
+      </div>
+      <div class="oop-card abs">
+        <h4>📐 Abstraction</h4>
+        <p><b>Where:</b> BaseReport, BaseEntity, BaseContact</p>
+        <p>Abstract classes define rules (must have validate(), to_dict()) but cannot be used directly — only child classes can.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. FEATURES -->
+  <div class="section">
+    <h2><span class="num red">5</span> Key Features</h2>
+    <div class="feat-grid">
+      <div class="feat"><div class="fi">📊</div><h4>Dashboard</h4><p>Stats, charts, alerts overview</p></div>
+      <div class="feat"><div class="fi">📦</div><h4>Products</h4><p>Add, edit, delete products</p></div>
+      <div class="feat"><div class="fi">🏭</div><h4>Inventory</h4><p>Stock levels & low stock alerts</p></div>
+      <div class="feat"><div class="fi">💰</div><h4>Transactions</h4><p>Purchase, Sale, Return tracking</p></div>
+      <div class="feat"><div class="fi">🚚</div><h4>Suppliers</h4><p>Supplier management</p></div>
+      <div class="feat"><div class="fi">📈</div><h4>Reports</h4><p>Sales & stock reports (OOP)</p></div>
+      <div class="feat"><div class="fi">👥</div><h4>User Roles</h4><p>Admin, Manager, Staff</p></div>
+      <div class="feat"><div class="fi">🔐</div><h4>JWT Auth</h4><p>Secure login with tokens</p></div>
+      <div class="feat"><div class="fi">🌙</div><h4>Dark Theme</h4><p>Modern dark UI design</p></div>
+    </div>
+  </div>
+
+  <!-- 6. LOGIN -->
+  <div class="section">
+    <h2><span class="num cyan">6</span> Demo Login Credentials</h2>
+    <table class="login-table">
+      <thead><tr><th>Role</th><th>Email</th><th>Password</th><th>Can Do</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="role-badge role-admin">👑 Admin</span></td>
+          <td>admin@stock.com</td>
+          <td>admin123</td>
+          <td>Everything — manage users, products, reports</td>
+        </tr>
+        <tr>
+          <td><span class="role-badge role-manager">🏪 Manager</span></td>
+          <td>manager@stock.com</td>
+          <td>manager123</td>
+          <td>Products, suppliers, reports — no user management</td>
+        </tr>
+        <tr>
+          <td><span class="role-badge role-staff">👷 Staff</span></td>
+          <td>staff@stock.com</td>
+          <td>staff123</td>
+          <td>View products, record transactions only</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="footer">
+    StockFlow — Built with React + FastAPI + SQLite | OOP Concepts Demonstrated
+  </div>
+
+</div>
+</body>
+</html>
