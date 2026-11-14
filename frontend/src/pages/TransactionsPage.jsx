@@ -12,7 +12,7 @@ function TxnModal({ open, onClose, onSave, products, suppliers }) {
 
   useEffect(() => {
     if (form.product_id) {
-      const prod = products.find(p => p.id === +form.product_id)
+      const prod = products.find(p => p.id === form.product_id)
       if (prod) set('unit_price', form.transaction_type === 'purchase' ? prod.cost_price : prod.selling_price)
     }
   }, [form.product_id, form.transaction_type])
@@ -94,7 +94,8 @@ export default function TransactionsPage() {
 
   const handleSave = async form => {
     try {
-      const payload = { ...form, product_id: +form.product_id, quantity: +form.quantity, unit_price: +form.unit_price, supplier_id: form.supplier_id ? +form.supplier_id : null }
+      // product_id and supplier_id are MongoDB ObjectId strings — do NOT coerce to number
+      const payload = { ...form, quantity: +form.quantity, unit_price: +form.unit_price, supplier_id: form.supplier_id || null }
       const { data } = await api.post('/transactions/', payload)
       toast.success(`Transaction recorded — Ref: ${data.reference_no}`)
       setModal(false); load()

@@ -59,6 +59,26 @@ export default function LoginPage() {
             </button>
           </form>
         </div>
+        {/* Create account */}
+<div style={{ marginTop: 24, textAlign: 'center' }}>
+  <p style={{ fontSize: 13, color: 'var(--text2)' }}>
+    Don't have an account?{' '}
+    <button
+      type="button"
+      onClick={() => navigate('/register')}
+      style={{
+        background: 'none',
+        border: 'none',
+        color: 'var(--accent)',
+        cursor: 'pointer',
+        fontWeight: 600,
+        padding: 0
+      }}
+    >
+      Create account
+    </button>
+  </p>
+</div>
 
         {/* Demo credentials */}
         <div style={{ marginTop: 16 }}>

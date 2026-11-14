@@ -10,6 +10,7 @@ import TransactionsPage from './pages/TransactionsPage'
 import SuppliersPage  from './pages/SuppliersPage'
 import ReportsPage    from './pages/ReportsPage'
 import UsersPage      from './pages/UsersPage'
+import RegisterPage   from './pages/RegisterPage'
 
 function PrivateRoute({ children }) {
   const { user } = useAuth()
@@ -21,6 +22,7 @@ function AppRoutes() {
   return (
     <Routes>
       <Route path="/login" element={user ? <Navigate to="/" replace /> : <LoginPage />} />
+      <Route path="/register" element={<RegisterPage />} />
       <Route path="/" element={<PrivateRoute><Layout /></PrivateRoute>}>
         <Route index element={<DashboardPage />} />
         <Route path="products"     element={<ProductsPage />} />
